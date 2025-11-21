@@ -2,9 +2,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSuggestions, clearSuggestions } from "../store/suggestionsSlice";
-import { addMessage } from "../store/messagesSlice";       // ✅ FIXED
+import { addMessage } from "../store/messagesSlice";
 import SuggestionList from "./SuggestionList";
 import { getCurrentToken } from "../utils/caretUtils";
+import styles from "../styles/MessageInput.module.css";
 
 export default function MessageInput() {
   const [text, setText] = useState("");
@@ -13,13 +14,11 @@ export default function MessageInput() {
   const dispatch = useDispatch();
   const suggestions = useSelector((s) => s.suggestions?.items || []);
 
-  // Update caret
   const updateCaret = (e) => {
     const pos = e.target.selectionStart;
     setCaret(pos);
   };
 
-  // ✅ FIXED handleSend
   const handleSend = () => {
     if (!text.trim()) return;
     console.log("Sending message:", text);
@@ -29,7 +28,6 @@ export default function MessageInput() {
     dispatch(setSuggestions([]));    // ✅ Correct Redux way
   };
 
-  // Fetch suggestions
   useEffect(() => {
     try {
       const token = getCurrentToken(text || "", caret || 0);
@@ -41,16 +39,11 @@ export default function MessageInput() {
 
       const trigger = token[0];
       const query = token.slice(1);
-
-      const url = `http://localhost:7001/api/tags?search=${encodeURIComponent(
-        query
-      )}`;
+      const url = `http://localhost:7001/api/tags?search=${encodeURIComponent(query)}`;
 
       fetch(url)
         .then((res) => res.json())
-        .then((data) => {
-          dispatch(setSuggestions(Array.isArray(data) ? data : []));
-        })
+        .then((data) => dispatch(setSuggestions(Array.isArray(data) ? data : [])))
         .catch(() => dispatch(clearSuggestions()));
     } catch (err) {
       dispatch(clearSuggestions());
@@ -62,12 +55,10 @@ export default function MessageInput() {
     const start = caret - token.length;
     const before = text.slice(0, start);
     const after = text.slice(caret);
-    const inserted = item.label;
-    const newText = before + inserted + " " + after;
-
+    const newText = before + item.label + " " + after;
     setText(newText);
 
-    const newPos = start + inserted.length + 1;
+    const newPos = start + item.label.length + 1;
     setTimeout(() => {
       if (textareaRef.current) {
         textareaRef.current.focus();
@@ -80,11 +71,11 @@ export default function MessageInput() {
   };
 
   return (
-    <div className="relative w-full p-4 border-t bg-white">
-      <div className="flex gap-3">
+    <div className={styles.messageInputContainer}>
+      <div className={styles.inputRow}>
         <textarea
           ref={textareaRef}
-          className="flex-1 border p-3 rounded"
+          className={styles.textarea}
           value={text}
           placeholder="Type a message... use @ or # to tag"
           onChange={(e) => {
@@ -95,21 +86,15 @@ export default function MessageInput() {
           onKeyUp={updateCaret}
           rows={3}
         />
-
-        {/* SEND BUTTON FIXED */}
-        <button
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 active:scale-95 transition"
-          onClick={handleSend}
-        >
+        <button className={styles.sendButton} onClick={handleSend}>
           Send
         </button>
       </div>
 
       {suggestions.length > 0 && (
-        <SuggestionList
-          suggestions={suggestions}
-          onSelect={onSelectSuggestion}
-        />
+        <div className={styles.suggestionsDropdown}>
+          <SuggestionList suggestions={suggestions} onSelect={onSelectSuggestion} />
+        </div>
       )}
     </div>
   );

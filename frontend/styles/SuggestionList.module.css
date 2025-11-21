@@ -1,0 +1,32 @@
+/* Container for the suggestions list */
+.suggestionList {
+    background-color: #fff; /* white background */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  /* Individual suggestion item */
+  .suggestionItem {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+    color: #111;
+  }
+  
+  /* Hover effect */
+  .suggestionItem:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Highlighting for selected suggestion (optional) */
+  .suggestionItem.selected {
+    background-color: #dcf8c6; /* WhatsApp green bubble highlight */
+  }
+  

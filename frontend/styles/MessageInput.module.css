@@ -1,0 +1,62 @@
+/* Container around the input + send button */
+.messageInputContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #ffffff; /* WhatsApp input area white */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+  }
+  
+  /* Flex wrapper for textarea and button */
+  .inputRow {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* Textarea styling */
+  .textarea {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  /* Send button styling */
+  .sendButton {
+    background-color: #25d366; /* WhatsApp green */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  
+  .sendButton:hover {
+    background-color: #128c7e; /* darker green hover */
+  }
+  
+  /* Suggestions container (absolute dropdown) */
+  .suggestionsDropdown {
+    position: absolute;
+    bottom: 60px; /* above input */
+    left: 0;
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 100;
+  }
+  
