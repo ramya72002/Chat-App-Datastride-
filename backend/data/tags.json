@@ -1,0 +1,33 @@
+[
+    {
+      "id": "u1",
+      "label": "Alice",
+      "trigger": "@"
+    },
+    {
+      "id": "u2",
+      "label": "Bob",
+      "trigger": "@"
+    },
+    {
+      "id": "u3",
+      "label": "Charlie",
+      "trigger": "@"
+    },
+    {
+      "id": "t1",
+      "label": "NextJS",
+      "trigger": "#"
+    },
+    {
+      "id": "t2",
+      "label": "NodeJS",
+      "trigger": "#"
+    },
+    {
+      "id": "t3",
+      "label": "React",
+      "trigger": "#"
+    }
+  ]
+  
