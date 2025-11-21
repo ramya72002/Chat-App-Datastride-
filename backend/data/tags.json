@@ -1,17 +1,17 @@
 [
     {
       "id": "u1",
-      "label": "Alice",
+      "label": "Ramesh",
       "trigger": "@"
     },
     {
       "id": "u2",
-      "label": "Bob",
+      "label": "Tanuj",
       "trigger": "@"
     },
     {
       "id": "u3",
-      "label": "Charlie",
+      "label": "Kumar",
       "trigger": "@"
     },
     {
